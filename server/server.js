@@ -1,12 +1,12 @@
 const express = require('express');
-const mongoose = require("mongoose")
-const bodyParser = require("body-parser")
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 const multer = require("multer");
-const uuidv4 = require("uuid/v4")
+const uuidv4 = require("uuid/v4");
 
-const authRoutes = require ("./routes/auth")
+const authRoutes = require("./routes/auth");
 
-const path = require("path")
+const path = require("path");
 
 const app = express();
 const port = 5000;
@@ -19,7 +19,7 @@ const fileStorage = multer.diskStorage({
     filename: function (req, file, cb) {
         cb(null, file.filename + "_" + uuidv4())
     }
-})
+});
 
 const fileFilter = (req, file, cb) => {
     if (
@@ -32,19 +32,19 @@ const fileFilter = (req, file, cb) => {
     else {
         cb(null, false)
     }
-}
+};
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 app.use(
     multer({ fileFilter: fileFilter, storage: fileStorage }).single("image")
-)
+);
 // static file response generation
-app.use('/images', express.static(path.join(__dirname, 'static', "images")))
+app.use('/images', express.static(path.join(__dirname, 'static', "images")));
 
 app.get('/', (req, res) => res.send('Hello World!'));
 
 // Setting up th routes
-app.use('/auth',authRoutes)
+app.use('/auth', authRoutes);
 
 // Setup for CORS
 app.use((req, res, next) => {
@@ -52,7 +52,7 @@ app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Method", "GET, POST, PUT, PATCH, DELETE");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     next();
-})
+});
 
 // generic error handler
 app.use((error, req, resp, next) => {
@@ -61,7 +61,7 @@ app.use((error, req, resp, next) => {
     const message = error.message;
     const data = error.data
     res.status(status).json({ message: message, data: data });
-})
+});
 
 //app initilization
 mongoose.connect("mongodb+srv://Akash:akashmukul@cooldevscluster0-zdpgi.mongodb.net/test?retryWrites=true&w=majority")
@@ -71,4 +71,4 @@ mongoose.connect("mongodb+srv://Akash:akashmukul@cooldevscluster0-zdpgi.mongodb.
         })
     }).catch(err => {
         console.log(`server failed with error ---${err}`)
-    })
+    });
