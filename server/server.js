@@ -55,9 +55,9 @@ app.use((req, res, next) => {
 });
 
 // generic error handler
-app.use((error, req, resp, next) => {
+app.use((error, req, res, next) => {
     console.log(`request failed with error---${error}`)
-    const status = error.statusCode | 500
+    const status = error.statusCode
     const message = error.message;
     const data = error.data
     res.status(status).json({ message: message, data: data });
