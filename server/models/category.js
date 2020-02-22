@@ -8,7 +8,8 @@ const categorySchema = new Schema({
     },
     usageCount:{
         type:Number,
-        require:false
+        require:false,
+        default:0
     },
 }, {timestamps:true} );
 

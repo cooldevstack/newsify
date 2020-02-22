@@ -5,6 +5,7 @@ const multer = require("multer");
 const uuidv4 = require("uuid/v4");
 
 const authRoutes = require("./routes/auth");
+const tagRoutes = require("./routes/tags")
 
 const path = require("path");
 
@@ -45,6 +46,7 @@ app.get('/', (req, res) => res.send('Hello World!'));
 
 // Setting up th routes
 app.use('/auth', authRoutes);
+app.use('/Tag', tagRoutes)
 
 // Setup for CORS
 app.use((req, res, next) => {

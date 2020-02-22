@@ -8,7 +8,8 @@ const tagsSchema = new Schema({
     },
     usageCount: {
         type: Number,
-        required: false
+        required: false,
+        default:0
     }
 }, { timestamps: true })
 

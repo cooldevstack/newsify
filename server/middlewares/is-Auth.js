@@ -10,6 +10,7 @@ module.exports = (req, res, next) => {
     const token = authorization.split(' ')[1];
     let decodedToken;
     try {
+        console.log(token)
         decodedToken = jwt.decode(token, "superSecretKeyisHighlySecret")
     } catch (err) {
         throwError("unable to process your token", 500)

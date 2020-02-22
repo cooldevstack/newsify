@@ -2,7 +2,6 @@ const express = require('express');
 const { body } = require("express-validator")
 const User = require("../models/user")
 const router = express.Router();
-const throwError = require("../utility/utility")
 const authController = require("../controllers/auth")
 
 router.put("/signup", [
